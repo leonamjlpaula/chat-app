@@ -2,34 +2,37 @@ const colors = {
     green: '#008A2F',
     darkGrey: '#42464D',
     grey: '#717680',
+    greyMedium: '#90929D',
     black: '#191B1F',
     white: '#fff',
     blue: '#506CF0',
     lightGrey: '#D2D7DB',
 };
 
+const fontFamily = 'SF-Pro-Text';
+
 export const defaultTheme = {
     typography: {
         title: {
-            fontFamily: 'monospace',
+            fontFamily,
             size: '15px',
             weight: 700,
             color: colors.black,
         },
         titleLight: {
-            fontFamily: 'monospace',
+            fontFamily,
             size: '15px',
             weight: 600,
             color: colors.black,
         },
         body: {
-            fontFamily: 'SF Pro Text',
+            fontFamily,
             size: '15px',
             weight: 400,
             color: colors.darkGrey,
         },
         bodyLight: {
-            fontFamily: 'SF Pro Text',
+            fontFamily,
             size: '15px',
             weight: 400,
             color: colors.grey,
@@ -38,5 +41,6 @@ export const defaultTheme = {
     shapes: {
         lineColor: colors.lightGrey,
     },
+    tabIcons: { activeColor: colors.black, inactiveColor: colors.greyMedium },
     colors: { ...colors },
 };
