@@ -9,7 +9,7 @@ const colors = {
     lightGrey: '#D2D7DB',
 };
 
-const fontFamily = 'SF-Pro-Text';
+const fontFamily = 'Menlo';
 
 export const defaultTheme = {
     typography: {
@@ -42,5 +42,8 @@ export const defaultTheme = {
         lineColor: colors.lightGrey,
     },
     tabIcons: { activeColor: colors.black, inactiveColor: colors.greyMedium },
+    screens: {
+        backgroundColor: colors.white,
+    },
     colors: { ...colors },
 };
