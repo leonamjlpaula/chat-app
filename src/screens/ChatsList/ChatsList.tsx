@@ -134,6 +134,7 @@ const ChatsList = () => {
                 data={chats}
                 renderItem={({ item }) => <ChatListItem {...item} />}
                 keyExtractor={({ id }) => id}
+                showsVerticalScrollIndicator={false}
             />
         </Container>
     );
