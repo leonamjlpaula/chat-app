@@ -6,7 +6,7 @@ import HomeSVG from '../assets/images/home.svg';
 import ChatsSVG from '../assets/images/messages.svg';
 import NotificationsSVG from '../assets/images/notifications.svg';
 import SpaceSVG from '../assets/images/space.svg';
-import { EmptyScreen } from '../screens/EmptyScreen';
+import { ChatsList, EmptyScreen } from '../screens';
 
 const CreateChatComponent = () => {
     return null;
@@ -29,6 +29,7 @@ export default function Tabnavigator() {
     const theme = useTheme();
     return (
         <Tab.Navigator
+            initialRouteName="Chats"
             screenOptions={{
                 headerShown: false,
                 tabBarShowLabel: false,
@@ -62,7 +63,7 @@ export default function Tabnavigator() {
             />
             <Tab.Screen
                 name="Chats"
-                component={EmptyScreen}
+                component={ChatsList}
                 options={{
                     tabBarIcon: ChatsIcon,
                 }}
