@@ -14,6 +14,13 @@ export const TextTitle = styled.Text`
     font-weight: ${({ theme }) => theme.typography.title.weight};
 `;
 
+export const TextTitleLight = styled.Text`
+    color: ${({ theme }) => theme.typography.title.color};
+    font-family: ${({ theme }) => theme.typography.title.fontFamily};
+    font-size: ${({ theme }) => theme.typography.title.size};
+    font-weight: ${({ theme }) => theme.typography.title.weight};
+`;
+
 export const TextBodyLight = styled.Text`
     color: ${({ theme }) => theme.typography.bodyLight.color};
     font-family: ${({ theme }) => theme.typography.bodyLight.fontFamily};
