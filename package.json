@@ -7,9 +7,15 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "npm:clean": "rm -rf node_modules && npm cache clean && npm install",
+    "yarn:clean": "rm -rf node_modules && yarn cache clean --force && yarn install",
+    "android:clean": "cd android && ./gradlew clean && ./gradlew cleanBuildCache && cd ..",
+    "ios:clean": "cd ios && xcodebuild clean && rm -rf ~/Library/Caches/CocoaPods && rm -rf Pods && rm -rf ~/Library/Developer/Xcode/DerivedData/* && pod cache clean --all && pod deintegrate && pod setup && pod install && cd .."
   },
   "dependencies": {
+    "@react-native-firebase/app": "^14.12.0",
+    "@react-native-firebase/firestore": "^14.12.0",
     "@react-navigation/bottom-tabs": "^6.5.3",
     "@react-navigation/native": "^6.1.2",
     "@react-navigation/native-stack": "^6.9.8",

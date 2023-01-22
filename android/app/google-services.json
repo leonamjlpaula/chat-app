@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "459492746281",
+    "project_id": "circlechatapp-1e32a",
+    "storage_bucket": "circlechatapp-1e32a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:459492746281:android:d2b1a0e57b96b7e2102838",
+        "android_client_info": {
+          "package_name": "com.circlechatapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "459492746281-c1bs6gd6h9fglv9i0iripnejn9afa6kr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.circlechatapp",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "459492746281-rqdu36c7i1ukj97d4ub1o89p0n8i81cp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA87k73W5oNuqs5Dzu6gLDjtxz-ijZwtUU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "459492746281-rqdu36c7i1ukj97d4ub1o89p0n8i81cp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

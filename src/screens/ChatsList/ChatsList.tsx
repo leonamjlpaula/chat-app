@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FlatList } from 'react-native';
+import firestore from '@react-native-firebase/firestore';
 
 import { Avatar, ChatListItem, CircleLogo } from '../../components';
 import { Container } from '../../designSystem';
@@ -119,6 +120,17 @@ const mockChats: Chat[] = [
 
 const ChatsList = () => {
     const [chats, setChats] = useState<Chat[]>(mockChats);
+
+    useEffect(() => {
+        firestore()
+            .collection('users')
+            .get()
+            .then(queySnapshot => {
+                queySnapshot.forEach(snapshot => {
+                    console.log(snapshot.data());
+                });
+            });
+    }, []);
 
     return (
         <Container>
