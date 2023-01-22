@@ -126,7 +126,7 @@ const ChatsList = () => {
                 <CircleLogo />
                 <Title>Messages</Title>
                 <Avatar
-                    avatarURL="https://www.shareicon.net/data/256x256/2016/07/05/791214_man_512x512.png"
+                    avatarURL="https://api.dicebear.com/5.x/pixel-art/png?seed=Jane"
                     size={32}
                 />
             </Header>
