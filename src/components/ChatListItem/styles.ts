@@ -1,6 +1,5 @@
+import { TextBody, TextBodyLight, TextTitle } from '@app/designSystem';
 import styled from 'styled-components/native';
-
-import { TextBody, TextBodyLight, TextTitle } from '../../designSystem';
 
 export const Container = styled.View`
     flex-direction: row;

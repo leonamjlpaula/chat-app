@@ -1,6 +1,5 @@
+import { TextTitle } from '@app/designSystem';
 import styled from 'styled-components/native';
-
-import { TextTitle } from '../../designSystem';
 
 export const Header = styled.View`
     flex-direction: row;
