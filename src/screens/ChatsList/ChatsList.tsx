@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { FlatList } from 'react-native';
+import { Avatar, ChatListItem, CircleLogo } from '@app/components';
+import { Container } from '@app/designSystem';
 import firestore from '@react-native-firebase/firestore';
-
-import { Avatar, ChatListItem, CircleLogo } from '../../components';
-import { Container } from '../../designSystem';
 
 import { Header, Title } from './styles';
 

@@ -1,12 +1,14 @@
 import React from 'react';
+// import HomeSVG from '../assets/images/home.svg';
+import HomeSVG from '@app/assets/images/home.svg';
+import ChatsSVG from '@app/assets/images/messages.svg';
+import NotificationsSVG from '@app/assets/images/notifications.svg';
+import SpaceSVG from '@app/assets/images/space.svg';
+import { EmptyScreen } from '@app/screens';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useTheme } from 'styled-components';
 
-import HomeSVG from '../assets/images/home.svg';
-import ChatsSVG from '../assets/images/messages.svg';
-import NotificationsSVG from '../assets/images/notifications.svg';
-import SpaceSVG from '../assets/images/space.svg';
-import { ChatsList, EmptyScreen } from '../screens';
+import ChatStackNavigator from './ChatStackNavigator';
 
 const CreateChatComponent = () => {
     return null;
@@ -63,7 +65,7 @@ export default function Tabnavigator() {
             />
             <Tab.Screen
                 name="Chats"
-                component={ChatsList}
+                component={ChatStackNavigator}
                 options={{
                     tabBarIcon: ChatsIcon,
                 }}

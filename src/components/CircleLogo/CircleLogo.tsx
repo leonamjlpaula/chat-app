@@ -1,6 +1,5 @@
 import React from 'react';
-
-import CircleSVG from '../../assets/images/circle-logo.svg';
+import CircleSVG from '@app/assets/images/circle-logo.svg';
 
 export default function CircleLogo() {
     return <CircleSVG />;
