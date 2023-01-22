@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>459492746281-hlq7s39224h4ncq0mm9ljr3f3qv10b0l.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.459492746281-hlq7s39224h4ncq0mm9ljr3f3qv10b0l</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>459492746281-c1bs6gd6h9fglv9i0iripnejn9afa6kr.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDPdkaKDFIofIwbfb01_gFztlNPtr4pVeM</string>
+	<key>GCM_SENDER_ID</key>
+	<string>459492746281</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>org.reactjs.native.example.CircleChatApp</string>
+	<key>PROJECT_ID</key>
+	<string>circlechatapp-1e32a</string>
+	<key>STORAGE_BUCKET</key>
+	<string>circlechatapp-1e32a.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:459492746281:ios:88e81b5bd203be63102838</string>
+</dict>
+</plist>
