@@ -4,15 +4,16 @@ import HomeSVG from '@app/assets/images/home.svg';
 import ChatsSVG from '@app/assets/images/messages.svg';
 import NotificationsSVG from '@app/assets/images/notifications.svg';
 import SpaceSVG from '@app/assets/images/space.svg';
-import { EmptyScreen } from '@app/screens';
+import { EmptyScreen, NewChat } from '@app/screens';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useTheme } from 'styled-components';
 
 import ChatStackNavigator from './ChatStackNavigator';
 
-const CreateChatComponent = () => {
+const EmptyComponent = () => {
     return null;
 };
+const NewChatComponent = () => <NewChat />;
 
 const Tab = createBottomTabNavigator();
 
@@ -54,7 +55,8 @@ export default function Tabnavigator() {
             />
             <Tab.Screen
                 name="CreateChatModal"
-                component={CreateChatComponent}
+                component={EmptyComponent}
+                options={{ tabBarButton: NewChatComponent }}
             />
             <Tab.Screen
                 name="Notifications"

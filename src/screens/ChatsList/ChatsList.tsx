@@ -121,14 +121,14 @@ const ChatsList = () => {
     const [chats, setChats] = useState<Chat[]>(mockChats);
 
     useEffect(() => {
-        firestore()
-            .collection('users')
-            .get()
-            .then(queySnapshot => {
-                queySnapshot.forEach(snapshot => {
-                    console.log(snapshot.data());
-                });
-            });
+        // firestore()
+        //     .collection('users')
+        //     .get()
+        //     .then(queySnapshot => {
+        //         queySnapshot.forEach(snapshot => {
+        //             console.log(snapshot.data());
+        //         });
+        //     });
     }, []);
 
     return (

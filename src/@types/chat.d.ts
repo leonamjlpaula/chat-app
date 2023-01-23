@@ -2,8 +2,9 @@ interface Chat {
     id: string;
     users: string[];
     chatName: string;
-    avatars: string[];
+    avatars: UserAvatarPair[];
     lastMessage: string;
-    createdAt: Date;
-    updatedAt: Date;
+    createdAt: Date | FirebaseFirestoreTypes.Timestamp;
+    updatedAt: Date | FirebaseFirestoreTypes.Timestamp;
+    hash: string;
 }
