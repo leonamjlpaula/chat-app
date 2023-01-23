@@ -45,5 +45,11 @@ export const defaultTheme = {
     screens: {
         backgroundColor: colors.white,
     },
+    input: {
+        defaultIconColor: colors.darkGrey,
+        textColor: colors.black,
+        placeholderColor: colors.grey,
+        borderColor: colors.lightGrey,
+    },
     colors: { ...colors },
 };
