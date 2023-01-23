@@ -9,7 +9,7 @@ const colors = {
     lightGrey: '#D2D7DB',
 };
 
-const fontFamily = 'Menlo';
+const fontFamily = 'Arial';
 
 export const defaultTheme = {
     typography: {
@@ -58,6 +58,11 @@ export const defaultTheme = {
         borderRadius: 4,
         borderWidth: 1,
         iconSize: 12,
+    },
+    indicators: {
+        activeNow: colors.green,
+        notActiveNow: colors.darkGrey,
+        unreadMessages: colors.blue,
     },
     colors: { ...colors },
 };
