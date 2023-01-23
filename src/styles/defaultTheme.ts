@@ -51,5 +51,13 @@ export const defaultTheme = {
         placeholderColor: colors.grey,
         borderColor: colors.lightGrey,
     },
+    checkBox: {
+        borderColor: colors.lightGrey,
+        selectedColor: colors.green,
+        size: 20,
+        borderRadius: 4,
+        borderWidth: 1,
+        iconSize: 12,
+    },
     colors: { ...colors },
 };
