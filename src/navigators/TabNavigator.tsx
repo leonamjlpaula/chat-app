@@ -4,7 +4,7 @@ import HomeSVG from '@app/assets/images/home.svg';
 import ChatsSVG from '@app/assets/images/messages.svg';
 import NotificationsSVG from '@app/assets/images/notifications.svg';
 import SpaceSVG from '@app/assets/images/space.svg';
-import { EmptyScreen, NewChat } from '@app/screens';
+import { ChatRoom, EmptyScreen, NewChat } from '@app/screens';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useTheme } from 'styled-components';
 
@@ -41,7 +41,7 @@ export default function Tabnavigator() {
             }}>
             <Tab.Screen
                 name="Home"
-                component={EmptyScreen}
+                component={ChatRoom}
                 options={{
                     tabBarIcon: HomeIcon,
                 }}
