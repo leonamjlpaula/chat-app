@@ -5,8 +5,9 @@ import Avatar from '../Avatar/Avatar';
 
 import { Container, DisplayName, TextWrapper } from './styles';
 
-interface UserListItemProps extends NewChatUser {
+interface UserListItemProps extends User {
     onPress: () => void;
+    isSelected?: boolean;
 }
 
 const UserListItem = ({
