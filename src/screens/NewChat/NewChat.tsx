@@ -5,9 +5,11 @@ import { fetchAllUsers } from '@app/api/fetchAllUsers';
 import { fetchChatByHash } from '@app/api/fetchChatByHash';
 import AddSVG from '@app/assets/images/add.svg';
 import { TextButton, UserListItem } from '@app/components';
+import { useAuth } from '@app/context/AuthProvider';
 import { Input } from '@app/designSystem';
 import { composeGroupChatName } from '@app/utils/composeGroupChatName';
 import { generateChatHash } from '@app/utils/generateChatHash';
+import { useNavigation } from '@react-navigation/native';
 
 import {
     AddButton,
@@ -19,8 +21,6 @@ import {
     Title,
 } from './styles';
 
-const USER_ID = 'bl9i7nN0sA3pfLdhJyAy';
-
 const NewChat = () => {
     const [modalVisible, setModalVisible] = useState(false);
     const [selectedUserIds, setSelectedUserIds] = useState<string[]>([]);
@@ -29,6 +29,9 @@ const NewChat = () => {
     const [chatNameString, setChatNameString] = useState('');
 
     const allUsers = useRef<User[]>([]);
+
+    const { user } = useAuth();
+    const { navigate } = useNavigation();
 
     useEffect(() => {
         if (!modalVisible) {
@@ -39,12 +42,13 @@ const NewChat = () => {
         async function loadData() {
             const result = await fetchAllUsers();
             if (result) {
-                const filteredResult = result.filter(u => u.id !== USER_ID);
+                const filteredResult = result.filter(u => u.id !== user?.id);
                 setUsers([...filteredResult]);
                 allUsers.current = [...filteredResult];
             }
         }
         loadData();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [modalVisible]);
 
     const handleOnCancel = () => {
@@ -52,7 +56,8 @@ const NewChat = () => {
     };
 
     const navigateToChat = (chat: Chat) => {
-        //TODO
+        handleOnCancel();
+        navigate('ChatRoom', chat);
     };
 
     const handleOnCreate = async () => {
@@ -82,7 +87,7 @@ const NewChat = () => {
             const chat = await createChat({
                 chatName,
                 hash,
-                userIds: [...selectedUserIds, USER_ID],
+                userIds: [...selectedUserIds, user?.id || ''],
                 userAvatars: avatars,
             });
             navigateToChat(chat);
@@ -97,7 +102,7 @@ const NewChat = () => {
         const chat = await createChat({
             chatName,
             hash,
-            userIds: [...selectedUserIds, USER_ID],
+            userIds: [...selectedUserIds, user?.id || ''],
             userAvatars: avatars,
         });
         navigateToChat(chat);
@@ -120,8 +125,8 @@ const NewChat = () => {
     };
 
     useEffect(() => {
-        const filteredUsers = allUsers.current.filter(user =>
-            user.displayName
+        const filteredUsers = allUsers.current.filter(u =>
+            u.displayName
                 .toLocaleLowerCase()
                 .includes(searchString.toLocaleLowerCase()),
         );
