@@ -1,15 +1,19 @@
 import React from 'react';
-import { AuthStack } from '@app/navigators';
+import { AuthProvider } from '@app/context/AuthProvider';
 import { defaultTheme } from '@app/styles/defaultTheme';
 import { NavigationContainer } from '@react-navigation/native';
 import { ThemeProvider } from 'styled-components';
 import { DefaultTheme } from 'styled-components/native';
 
+import { AppRoutes } from './navigators';
+
 export default function App() {
     return (
         <NavigationContainer>
             <ThemeProvider theme={defaultTheme satisfies DefaultTheme}>
-                <AuthStack />
+                <AuthProvider>
+                    <AppRoutes />
+                </AuthProvider>
             </ThemeProvider>
         </NavigationContainer>
     );

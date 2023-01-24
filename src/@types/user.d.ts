@@ -3,4 +3,5 @@ interface User {
     displayName: string;
     createdAt: Date;
     avatarURL: string;
+    email: string;
 }

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { FlatList } from 'react-native';
 import { Avatar, ChatListItem, CircleLogo } from '@app/components';
+import { useAuth } from '@app/context/AuthProvider';
 import { Container } from '@app/designSystem';
 import firestore from '@react-native-firebase/firestore';
 
@@ -119,6 +120,9 @@ const mockChats: Chat[] = [
 
 const ChatsList = () => {
     const [chats, setChats] = useState<Chat[]>(mockChats);
+
+    const { user } = useAuth();
+    console.log(user);
 
     useEffect(() => {
         // firestore()

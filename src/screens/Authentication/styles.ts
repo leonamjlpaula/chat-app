@@ -19,6 +19,7 @@ export const LoginButton = styled.TouchableOpacity`
     background: ${({ theme }) => theme.button.background};
     padding: 8px;
     border-radius: 8px;
+    opacity: ${({ disabled }) => (disabled ? '0.5' : '1')};
 `;
 
 export const LoginButtonText = styled.Text`
@@ -28,4 +29,12 @@ export const LoginButtonText = styled.Text`
 export const LinkText = styled(TextBodyLight)`
     font-size: 11px;
     text-decoration: underline;
+`;
+
+export const HStack = styled.View`
+    flex-direction: row;
+`;
+
+export const LoadingIndicator = styled.ActivityIndicator`
+    margin-right: 8px;
 `;
