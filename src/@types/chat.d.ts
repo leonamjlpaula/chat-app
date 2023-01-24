@@ -4,7 +4,7 @@ interface Chat {
     chatName: string;
     avatars: UserAvatarPair[];
     lastMessage: string;
-    createdAt: Date | FirebaseFirestoreTypes.Timestamp;
-    updatedAt: Date | FirebaseFirestoreTypes.Timestamp;
+    createdAt: Date;
+    updatedAt: Date;
     hash: string;
 }

@@ -1,6 +1,11 @@
 import React from 'react';
+import { useAuth } from '@app/context/AuthProvider';
+import format from 'date-fns/format';
+import formatDistanceStrict from 'date-fns/formatDistanceStrict';
+import isToday from 'date-fns/isToday';
 
 import Avatar from '../Avatar/Avatar';
+import { GroupChatAvatar } from '..';
 
 import {
     Container,
@@ -17,10 +22,27 @@ export default function ChatListItem({
     lastMessage,
     updatedAt,
     chatName,
+    avatars,
 }: Chat) {
+    const { user } = useAuth();
+    const filteredAvatars = avatars.filter(pair => pair.id !== user?.id);
+
+    const formmatedDate = isToday(updatedAt)
+        ? format(updatedAt, 'hh:MM aa')
+        : formatDistanceStrict(updatedAt, new Date(), {
+              addSuffix: true,
+          });
+
     return (
         <Container>
-            <Avatar avatarURL="https://www.shareicon.net/data/256x256/2016/07/05/791214_man_512x512.png" />
+            {avatars.length > 2 ? (
+                <GroupChatAvatar
+                    avatarURLBack={filteredAvatars[0].avatarURL}
+                    avatarURLFront={filteredAvatars[1].avatarURL}
+                />
+            ) : (
+                <Avatar avatarURL={filteredAvatars[0].avatarURL} />
+            )}
             <VStack>
                 <HStack>
                     <Title>{chatName}</Title>
@@ -32,9 +54,7 @@ export default function ChatListItem({
                             {lastMessage}
                         </LastMessage>
                     </TextWrapper>
-                    <LastMessageTime>
-                        {updatedAt.toDateString()}
-                    </LastMessageTime>
+                    <LastMessageTime>{formmatedDate}</LastMessageTime>
                 </HStack>
             </VStack>
         </Container>
