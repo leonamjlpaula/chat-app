@@ -1,5 +1,5 @@
 import React from 'react';
-import { TabNavigator } from '@app/navigators';
+import { AuthStack } from '@app/navigators';
 import { defaultTheme } from '@app/styles/defaultTheme';
 import { NavigationContainer } from '@react-navigation/native';
 import { ThemeProvider } from 'styled-components';
@@ -9,7 +9,7 @@ export default function App() {
     return (
         <NavigationContainer>
             <ThemeProvider theme={defaultTheme satisfies DefaultTheme}>
-                <TabNavigator />
+                <AuthStack />
             </ThemeProvider>
         </NavigationContainer>
     );
