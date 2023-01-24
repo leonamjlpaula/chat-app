@@ -64,5 +64,9 @@ export const defaultTheme = {
         notActiveNow: colors.darkGrey,
         unreadMessages: colors.blue,
     },
+    button: {
+        background: colors.blue,
+        textColor: colors.white,
+    },
     colors: { ...colors },
 };

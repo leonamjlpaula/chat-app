@@ -27,7 +27,10 @@ const Input = ({
                 />
             )}
 
-            <RNInput {...rest} />
+            <RNInput
+                {...rest}
+                placeholderTextColor={theme.input.placeholderColor}
+            />
             {!!rightIcon && (
                 <TouchableOpacity onPress={onRightIconPress}>
                     <RightIcon
