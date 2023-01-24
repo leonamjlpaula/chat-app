@@ -1,13 +1,23 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, { useState } from 'react';
-import { KeyboardAvoidingView, Platform, TouchableOpacity } from 'react-native';
+import {
+    Alert,
+    KeyboardAvoidingView,
+    Platform,
+    TouchableOpacity,
+} from 'react-native';
+import { createUser } from '@app/api/creatUser';
 import { CircleLogo } from '@app/components';
+import { useAuth } from '@app/context/AuthProvider';
 import { Input } from '@app/designSystem';
+import auth from '@react-native-firebase/auth';
 import { useNavigation } from '@react-navigation/native';
 
 import {
     Container,
+    HStack,
     LinkText,
+    LoadingIndicator,
     LoginButton,
     LoginButtonText,
     Spacer,
@@ -18,8 +28,36 @@ const SignUp = () => {
     const [name, setName] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     const { navigate } = useNavigation();
+    const { setUser } = useAuth();
+
+    const handleSignUp = async () => {
+        if (name.length < 2) {
+            Alert.alert('Error', 'name must have at least 2 characters');
+            return;
+        }
+
+        try {
+            setIsLoading(true);
+            const result = await auth().createUserWithEmailAndPassword(
+                email,
+                password,
+            );
+            console.log(result);
+            const user = await createUser({
+                id: result.user.uid,
+                displayName: name,
+                email,
+            });
+            setUser(user);
+        } catch ({ code }) {
+            Alert.alert('Account creation failed', code as string);
+        } finally {
+            setIsLoading(false);
+        }
+    };
 
     return (
         <KeyboardAvoidingView
@@ -33,6 +71,8 @@ const SignUp = () => {
                     onChangeText={setEmail}
                     leftIcon="email"
                     placeholder="Email"
+                    autoCapitalize="none"
+                    textContentType="emailAddress"
                 />
                 <Spacer />
                 <Input
@@ -40,6 +80,7 @@ const SignUp = () => {
                     onChangeText={setName}
                     leftIcon="account"
                     placeholder="Full name"
+                    autoCapitalize="words"
                 />
                 <Spacer />
                 <Input
@@ -47,13 +88,20 @@ const SignUp = () => {
                     onChangeText={setPassword}
                     placeholder="Password"
                     leftIcon="form-textbox-password"
-                    secureTextEntry={showPassword}
-                    rightIcon={showPassword ? 'eye' : 'eye-off'}
+                    secureTextEntry={!showPassword}
+                    rightIcon={showPassword ? 'eye-off' : 'eye'}
                     onRightIconPress={() => setShowPassword(prev => !prev)}
+                    autoCapitalize="none"
+                    textContentType="password"
                 />
                 <Spacer size={32} />
-                <LoginButton>
-                    <LoginButtonText>Sign in</LoginButtonText>
+                <LoginButton onPress={handleSignUp} disabled={isLoading}>
+                    <HStack>
+                        {isLoading && <LoadingIndicator size={12} />}
+                        <LoginButtonText>
+                            Create account and log in
+                        </LoginButtonText>
+                    </HStack>
                 </LoginButton>
                 <Spacer />
                 <TouchableOpacity onPress={() => navigate('SignIn')}>
