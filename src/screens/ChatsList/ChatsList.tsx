@@ -1,6 +1,12 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { FlatList } from 'react-native';
-import { Avatar, ChatListItem, CircleLogo } from '@app/components';
+import {
+    Avatar,
+    ChatListItem,
+    CircleLogo,
+    EmptyPlaceholder,
+    LoadingPlaceholder,
+} from '@app/components';
 import { useAuth } from '@app/context/AuthProvider';
 import { Container } from '@app/designSystem';
 import { ChatStackParamList } from '@app/navigators/ChatStackNavigator';
@@ -14,6 +20,12 @@ import { Header, Title } from './styles';
 
 type Props = NativeStackScreenProps<ChatStackParamList, 'ChatRoom'>;
 
+const EmptyComponent = () => (
+    <EmptyPlaceholder
+        text={`You don't have any chats yet.\nClick on + below to creat your first chat!`}
+    />
+);
+
 const ChatsList = ({ navigation }: Props) => {
     const [chats, setChats] = useState<Chat[]>([]);
     const [isLoading, setIsLoading] = useState(false);
@@ -23,6 +35,7 @@ const ChatsList = ({ navigation }: Props) => {
     const onSnapshot = (
         querySnapshot: FirebaseFirestoreTypes.QuerySnapshot<FirebaseFirestoreTypes.DocumentData>,
     ) => {
+        setIsLoading(false);
         if (querySnapshot.empty) {
             setChats([]);
             return;
@@ -60,6 +73,7 @@ const ChatsList = ({ navigation }: Props) => {
     };
 
     useEffect(() => {
+        setIsLoading(true);
         const unsubscribe = firestore()
             .collection('chats')
             .where('users', 'array-contains', user?.id)
@@ -88,6 +102,10 @@ const ChatsList = ({ navigation }: Props) => {
         [handleNavigation],
     );
 
+    if (isLoading) {
+        return <LoadingPlaceholder text="Fetching chats..." />;
+    }
+
     return (
         <Container>
             <Header>
@@ -96,10 +114,12 @@ const ChatsList = ({ navigation }: Props) => {
                 <Avatar avatarURL={user?.avatarURL || ''} size={32} />
             </Header>
             <FlatList
+                contentContainerStyle={{ flexGrow: 1 }}
                 data={chats}
                 renderItem={renderItem}
                 keyExtractor={({ id }) => id}
                 showsVerticalScrollIndicator={false}
+                ListEmptyComponent={EmptyComponent}
             />
         </Container>
     );

@@ -4,7 +4,7 @@ import { createChat } from '@app/api/createChat';
 import { fetchAllUsers } from '@app/api/fetchAllUsers';
 import { fetchChatByHash } from '@app/api/fetchChatByHash';
 import AddSVG from '@app/assets/images/add.svg';
-import { TextButton, UserListItem } from '@app/components';
+import { EmptyPlaceholder, TextButton, UserListItem } from '@app/components';
 import { useAuth } from '@app/context/AuthProvider';
 import { Input } from '@app/designSystem';
 import { generateChatHash } from '@app/utils/generateChatHash';
@@ -19,6 +19,8 @@ import {
     Spacer,
     Title,
 } from './styles';
+
+const EmptyComponent = () => <EmptyPlaceholder text={`No users found!`} />;
 
 const NewChat = () => {
     const [modalVisible, setModalVisible] = useState(false);
@@ -56,13 +58,16 @@ const NewChat = () => {
 
     const navigateToChat = (chat: Chat) => {
         handleOnCancel();
-        navigate('ChatRoom', { stringfiedChat: JSON.stringify(chat) });
+        navigate(
+            'ChatRoom' as never,
+            { stringfiedChat: JSON.stringify(chat) } as never,
+        );
     };
 
     const handleOnCreate = async () => {
         if (selectedUserIds.length === 0) return;
         const hash = generateChatHash(selectedUserIds);
-        // let chatName = '';
+
         const filteredSelectedUsers = allUsers.current.filter(u =>
             selectedUserIds.includes(u.id),
         );
@@ -186,10 +191,14 @@ const NewChat = () => {
                             </>
                         )}
                         <FlatList
+                            contentContainerStyle={{
+                                flexGrow: 1,
+                            }}
                             data={users}
                             renderItem={renderItem}
                             keyExtractor={({ id }) => id}
                             showsVerticalScrollIndicator={false}
+                            ListEmptyComponent={EmptyComponent}
                         />
                     </InnerContainer>
                 </Container>
