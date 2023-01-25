@@ -97,9 +97,13 @@ const ChatsList = ({ navigation }: Props) => {
 
     const renderItem = useCallback(
         ({ item }: { item: Chat }) => (
-            <ChatListItem {...item} onPress={() => handleNavigation(item)} />
+            <ChatListItem
+                {...item}
+                onPress={() => handleNavigation(item)}
+                userId={user?.id!}
+            />
         ),
-        [handleNavigation],
+        [handleNavigation, user],
     );
 
     if (isLoading) {

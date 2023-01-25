@@ -1,5 +1,4 @@
 import React, { memo } from 'react';
-import { useAuth } from '@app/context/AuthProvider';
 import { getChatName } from '@app/utils/getChatName';
 import format from 'date-fns/format';
 import formatDistanceStrict from 'date-fns/formatDistanceStrict';
@@ -21,6 +20,7 @@ import {
 
 interface ChatListItemProps extends Chat {
     onPress: () => void;
+    userId: string;
 }
 
 const ChatListItem = ({
@@ -29,9 +29,10 @@ const ChatListItem = ({
     chatName,
     userInfos,
     onPress,
+    userId,
+    id,
 }: ChatListItemProps) => {
-    const { user } = useAuth();
-    const filteredUserInfos = userInfos.filter(pair => pair.id !== user?.id);
+    const filteredUserInfos = userInfos.filter(pair => pair.id !== userId);
 
     const formmatedDate = isToday(updatedAt)
         ? format(updatedAt, 'hh:mm aa')
@@ -39,8 +40,7 @@ const ChatListItem = ({
               addSuffix: true,
           });
 
-    let formattedChatName =
-        chatName || getChatName({ userInfos, userId: user?.id! });
+    let formattedChatName = chatName || getChatName({ userInfos, userId });
 
     return (
         <Container onPress={onPress}>
@@ -63,7 +63,9 @@ const ChatListItem = ({
                             {lastMessage}
                         </LastMessage>
                     </TextWrapper>
-                    <LastMessageTime>{formmatedDate}</LastMessageTime>
+                    <LastMessageTime testID={`chat-list-formatted-date-${id}`}>
+                        {formmatedDate}
+                    </LastMessageTime>
                 </HStack>
             </VStack>
         </Container>

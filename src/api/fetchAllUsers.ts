@@ -1,7 +1,10 @@
 import firestore from '@react-native-firebase/firestore';
 
 export const fetchAllUsers = async () => {
-    const querySnapshot = await firestore().collection('users').get();
+    const querySnapshot = await firestore()
+        .collection('users')
+        .orderBy('displayName', 'asc')
+        .get();
 
     const users: User[] = [];
     querySnapshot.forEach(snapshot => {

@@ -26,8 +26,10 @@ const SendMessageInput = ({ onSend, ...rest }: SendMessageInputProps) => {
                 onSubmitEditing={({ nativeEvent }) =>
                     handlOnSend(nativeEvent.text)
                 }
+                testID="input-chat-message"
             />
             <SendButtonContainer
+                testID="input-chat-send-button"
                 onPress={() => handlOnSend(value)}
                 disabled={value.length === 0}>
                 <SendSVG />
