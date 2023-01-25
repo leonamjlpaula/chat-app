@@ -5,12 +5,10 @@ import {
     Platform,
     TouchableOpacity,
 } from 'react-native';
-import { fetchUser } from '@app/api/fetchUser';
 import { CircleLogo } from '@app/components';
 import { useAuth } from '@app/context/AuthProvider';
 import { Input } from '@app/designSystem';
 import { AuthStackParamList } from '@app/navigators/AuthStack';
-import auth from '@react-native-firebase/auth';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 import {
@@ -31,17 +29,12 @@ const SignIn = ({ navigation }: Props) => {
     const [showPassword, setShowPassword] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 
-    const { setUser } = useAuth();
+    const { signIn } = useAuth();
 
     const handleSignIn = async () => {
         try {
             setIsLoading(true);
-            const result = await auth().signInWithEmailAndPassword(
-                email,
-                password,
-            );
-            const user = await fetchUser(result.user.uid);
-            setUser(user);
+            await signIn({ email, password });
         } catch ({ code }) {
             Alert.alert('Login failed', code as string);
         } finally {

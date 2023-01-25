@@ -5,12 +5,10 @@ import {
     Platform,
     TouchableOpacity,
 } from 'react-native';
-import { createUser } from '@app/api/creatUser';
 import { CircleLogo } from '@app/components';
 import { useAuth } from '@app/context/AuthProvider';
 import { Input } from '@app/designSystem';
 import { AuthStackParamList } from '@app/navigators/AuthStack';
-import auth from '@react-native-firebase/auth';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 import {
@@ -32,7 +30,7 @@ const SignUp = ({ navigation }: Props) => {
     const [showPassword, setShowPassword] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 
-    const { setUser } = useAuth();
+    const { signUp } = useAuth();
 
     const handleSignUp = async () => {
         if (name.length < 2) {
@@ -42,16 +40,7 @@ const SignUp = ({ navigation }: Props) => {
 
         try {
             setIsLoading(true);
-            const result = await auth().createUserWithEmailAndPassword(
-                email,
-                password,
-            );
-            const user = await createUser({
-                id: result.user.uid,
-                displayName: name,
-                email,
-            });
-            setUser(user);
+            await signUp({ displayName: name, email, password });
         } catch ({ code }) {
             Alert.alert('Account creation failed', code as string);
         } finally {
