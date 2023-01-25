@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { FlatList } from 'react-native';
 import { Avatar, ChatListItem, CircleLogo } from '@app/components';
 import { useAuth } from '@app/context/AuthProvider';
@@ -72,6 +72,22 @@ const ChatsList = ({ navigation }: Props) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    const handleNavigation = useCallback(
+        (item: Chat) => {
+            navigation.navigate('ChatRoom', {
+                stringfiedChat: JSON.stringify(item),
+            });
+        },
+        [navigation],
+    );
+
+    const renderItem = useCallback(
+        ({ item }: { item: Chat }) => (
+            <ChatListItem {...item} onPress={() => handleNavigation(item)} />
+        ),
+        [handleNavigation],
+    );
+
     return (
         <Container>
             <Header>
@@ -81,16 +97,7 @@ const ChatsList = ({ navigation }: Props) => {
             </Header>
             <FlatList
                 data={chats}
-                renderItem={({ item }) => (
-                    <ChatListItem
-                        {...item}
-                        onPress={() =>
-                            navigation.navigate('ChatRoom', {
-                                stringfiedChat: JSON.stringify(item),
-                            })
-                        }
-                    />
-                )}
+                renderItem={renderItem}
                 keyExtractor={({ id }) => id}
                 showsVerticalScrollIndicator={false}
             />

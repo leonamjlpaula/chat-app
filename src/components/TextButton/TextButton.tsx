@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { TouchableOpacity } from 'react-native';
 import { TextBody, TextBodyLight } from '@app/designSystem';
 
@@ -14,7 +14,7 @@ const TextButton = ({
     disabled = false,
 }: TextButtonProps) => {
     return (
-        <TouchableOpacity onPress={onPress}>
+        <TouchableOpacity onPress={onPress} disabled={disabled}>
             {disabled ? (
                 <TextBodyLight>{children}</TextBodyLight>
             ) : (
@@ -24,4 +24,4 @@ const TextButton = ({
     );
 };
 
-export default TextButton;
+export default memo(TextButton);

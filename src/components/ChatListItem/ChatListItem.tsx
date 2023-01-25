@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { useAuth } from '@app/context/AuthProvider';
 import { getChatName } from '@app/utils/getChatName';
 import format from 'date-fns/format';
@@ -23,13 +23,13 @@ interface ChatListItemProps extends Chat {
     onPress: () => void;
 }
 
-export default function ChatListItem({
+const ChatListItem = ({
     lastMessage,
     updatedAt,
     chatName,
     userInfos,
     onPress,
-}: ChatListItemProps) {
+}: ChatListItemProps) => {
     const { user } = useAuth();
     const filteredUserInfos = userInfos.filter(pair => pair.id !== user?.id);
 
@@ -50,7 +50,7 @@ export default function ChatListItem({
                     avatarURLFront={filteredUserInfos[1].avatarURL}
                 />
             ) : (
-                <Avatar avatarURL={filteredUserInfos[0].avatarURL} />
+                <Avatar avatarURL={filteredUserInfos[0].avatarURL} activeNow />
             )}
             <VStack>
                 <HStack>
@@ -68,4 +68,6 @@ export default function ChatListItem({
             </VStack>
         </Container>
     );
-}
+};
+
+export default memo(ChatListItem);
