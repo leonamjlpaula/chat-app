@@ -8,10 +8,10 @@ const Container = styled.View`
     align-items: center;
 `;
 
-export default function EmptyScreen() {
+export default function SpaceScreen() {
     return (
         <Container>
-            <Text>Coming soon!</Text>
+            <Text>Space Screen</Text>
         </Container>
     );
 }

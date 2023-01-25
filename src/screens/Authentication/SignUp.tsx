@@ -1,4 +1,3 @@
-/* eslint-disable react-native/no-inline-styles */
 import React, { useState } from 'react';
 import {
     Alert,
@@ -45,7 +44,6 @@ const SignUp = () => {
                 email,
                 password,
             );
-            console.log(result);
             const user = await createUser({
                 id: result.user.uid,
                 displayName: name,

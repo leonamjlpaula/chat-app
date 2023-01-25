@@ -2,7 +2,7 @@ interface Chat {
     id: string;
     users: string[];
     chatName: string;
-    avatars: UserAvatarPair[];
+    userInfos: UserChatInfo[];
     lastMessage: string;
     createdAt: Date;
     updatedAt: Date;

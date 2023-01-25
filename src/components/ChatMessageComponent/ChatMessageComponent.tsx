@@ -1,4 +1,5 @@
 import React from 'react';
+import format from 'date-fns/format';
 
 import Avatar from '../Avatar/Avatar';
 
@@ -16,7 +17,10 @@ const ChatMessageComponent = ({
     avatarURL,
     content,
     displayName,
+    createdAt,
 }: ChatMessage) => {
+    const formattedDate = format(createdAt, 'MM/dd - hh:mm aa');
+
     return (
         <Container>
             <Avatar avatarURL={avatarURL} />
@@ -25,11 +29,9 @@ const ChatMessageComponent = ({
                     <TextWrapper>
                         <DisplayName numberOfLines={1} ellipsizeMode={'tail'}>
                             {displayName}
-                            {displayName}
-                            {displayName}
                         </DisplayName>
                     </TextWrapper>
-                    <SendDate>2:31PM</SendDate>
+                    <SendDate>{formattedDate}</SendDate>
                 </TitleStack>
                 <MessageContent>{content}</MessageContent>
             </MessageStack>

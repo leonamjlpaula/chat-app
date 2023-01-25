@@ -17,6 +17,7 @@ export const MessageStack = styled.View`
 
 export const SendDate = styled(TextBodyLight)`
     margin-left: 8px;
+    font-size: 13px;
 `;
 
 export const TitleStack = styled.View`
