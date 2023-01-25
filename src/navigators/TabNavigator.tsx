@@ -4,7 +4,12 @@ import HomeSVG from '@app/assets/images/home.svg';
 import ChatsSVG from '@app/assets/images/messages.svg';
 import NotificationsSVG from '@app/assets/images/notifications.svg';
 import SpaceSVG from '@app/assets/images/space.svg';
-import { ChatRoom, EmptyScreen, NewChat } from '@app/screens';
+import {
+    HomeScreen,
+    NewChat,
+    NotificationsScreen,
+    SpaceScreen,
+} from '@app/screens';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useTheme } from 'styled-components';
 
@@ -40,15 +45,15 @@ export default function Tabnavigator() {
                 tabBarInactiveTintColor: theme.tabIcons.inactiveColor,
             }}>
             <Tab.Screen
-                name="Home"
-                component={ChatRoom}
+                name="HomeScreen"
+                component={HomeScreen}
                 options={{
                     tabBarIcon: HomeIcon,
                 }}
             />
             <Tab.Screen
-                name="Space"
-                component={EmptyScreen}
+                name="SpaceScreen"
+                component={SpaceScreen}
                 options={{
                     tabBarIcon: SpaceIcon,
                 }}
@@ -59,8 +64,8 @@ export default function Tabnavigator() {
                 options={{ tabBarButton: NewChatComponent }}
             />
             <Tab.Screen
-                name="Notifications"
-                component={EmptyScreen}
+                name="NotificationsScreen"
+                component={NotificationsScreen}
                 options={{
                     tabBarIcon: NotificationsIcon,
                 }}

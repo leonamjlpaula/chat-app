@@ -2,7 +2,7 @@ import firestore from '@react-native-firebase/firestore';
 
 interface ICreateChat {
     userIds: string[];
-    userAvatars: UserAvatarPair[];
+    userInfos: UserChatInfo[];
     chatName: string;
     hash: string;
 }
@@ -11,7 +11,7 @@ export const createChat = async ({
     chatName,
     hash,
     userIds,
-    userAvatars,
+    userInfos,
 }: ICreateChat): Promise<Chat> => {
     const newChat = {
         createdAt: firestore.Timestamp.fromDate(new Date()),
@@ -19,7 +19,7 @@ export const createChat = async ({
         users: userIds,
         chatName,
         hash,
-        avatars: userAvatars,
+        userInfos,
         lastMessage: '',
     };
 

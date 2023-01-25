@@ -1,7 +1,7 @@
 import { TextBody, TextBodyLight, TextTitle } from '@app/designSystem';
 import styled from 'styled-components/native';
 
-export const Container = styled.View`
+export const Container = styled.TouchableOpacity`
     flex-direction: row;
     margin: 12px 0px;
 `;

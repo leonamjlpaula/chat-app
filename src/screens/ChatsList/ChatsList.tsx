@@ -6,6 +6,7 @@ import { Container } from '@app/designSystem';
 import firestore, {
     FirebaseFirestoreTypes,
 } from '@react-native-firebase/firestore';
+import { useNavigation } from '@react-navigation/native';
 import isAfter from 'date-fns/isAfter';
 
 import { Header, Title } from './styles';
@@ -15,15 +16,20 @@ const ChatsList = () => {
     const [isLoading, setIsLoading] = useState(false);
 
     const { user } = useAuth();
+    const { navigate } = useNavigation();
 
     const onSnapshot = (
         querySnapshot: FirebaseFirestoreTypes.QuerySnapshot<FirebaseFirestoreTypes.DocumentData>,
     ) => {
-        if (!querySnapshot) return;
+        if (querySnapshot.empty) {
+            setChats([]);
+            return;
+        }
+
         const newChats: Chat[] = [];
         querySnapshot.forEach(snapshot => {
             const {
-                avatars,
+                userInfos,
                 createdAt,
                 updatedAt,
                 chatName,
@@ -33,7 +39,7 @@ const ChatsList = () => {
             } = snapshot.data();
             const chat = {
                 id: snapshot.id,
-                avatars,
+                userInfos,
                 createdAt: createdAt.toDate(),
                 updatedAt: updatedAt.toDate(),
                 chatName,
@@ -41,7 +47,8 @@ const ChatsList = () => {
                 lastMessage,
                 users,
             };
-            newChats.push(chat);
+
+            if (lastMessage) newChats.push(chat);
         });
         const sortedChats = newChats.sort((a, b) =>
             isAfter(a.updatedAt, b.updatedAt) ? -1 : 1,
@@ -72,7 +79,14 @@ const ChatsList = () => {
             </Header>
             <FlatList
                 data={chats}
-                renderItem={({ item }) => <ChatListItem {...item} />}
+                renderItem={({ item }) => (
+                    <ChatListItem
+                        {...item}
+                        onPress={() =>
+                            navigate('ChatRoom', { chat: JSON.stringify(item) })
+                        }
+                    />
+                )}
                 keyExtractor={({ id }) => id}
                 showsVerticalScrollIndicator={false}
             />

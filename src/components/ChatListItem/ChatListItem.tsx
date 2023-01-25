@@ -1,5 +1,6 @@
 import React from 'react';
 import { useAuth } from '@app/context/AuthProvider';
+import { getChatName } from '@app/utils/getChatName';
 import format from 'date-fns/format';
 import formatDistanceStrict from 'date-fns/formatDistanceStrict';
 import isToday from 'date-fns/isToday';
@@ -18,34 +19,42 @@ import {
     VStack,
 } from './styles';
 
+interface ChatListItemProps extends Chat {
+    onPress: () => void;
+}
+
 export default function ChatListItem({
     lastMessage,
     updatedAt,
     chatName,
-    avatars,
-}: Chat) {
+    userInfos,
+    onPress,
+}: ChatListItemProps) {
     const { user } = useAuth();
-    const filteredAvatars = avatars.filter(pair => pair.id !== user?.id);
+    const filteredUserInfos = userInfos.filter(pair => pair.id !== user?.id);
 
     const formmatedDate = isToday(updatedAt)
-        ? format(updatedAt, 'hh:MM aa')
+        ? format(updatedAt, 'hh:mm aa')
         : formatDistanceStrict(updatedAt, new Date(), {
               addSuffix: true,
           });
 
+    let formattedChatName =
+        chatName || getChatName({ userInfos, userId: user?.id! });
+
     return (
-        <Container>
-            {avatars.length > 2 ? (
+        <Container onPress={onPress}>
+            {userInfos.length > 2 ? (
                 <GroupChatAvatar
-                    avatarURLBack={filteredAvatars[0].avatarURL}
-                    avatarURLFront={filteredAvatars[1].avatarURL}
+                    avatarURLBack={filteredUserInfos[0].avatarURL}
+                    avatarURLFront={filteredUserInfos[1].avatarURL}
                 />
             ) : (
-                <Avatar avatarURL={filteredAvatars[0].avatarURL} />
+                <Avatar avatarURL={filteredUserInfos[0].avatarURL} />
             )}
             <VStack>
                 <HStack>
-                    <Title>{chatName}</Title>
+                    <Title>{formattedChatName}</Title>
                     <NotificationIcon />
                 </HStack>
                 <HStack>

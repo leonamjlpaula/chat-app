@@ -57,38 +57,48 @@ const NewChat = () => {
 
     const navigateToChat = (chat: Chat) => {
         handleOnCancel();
-        navigate('ChatRoom', chat);
+        navigate('ChatRoom', { chat: JSON.stringify(chat) });
     };
 
     const handleOnCreate = async () => {
         const hash = generateChatHash(selectedUserIds);
-        let chatName = '';
+        // let chatName = '';
         const filteredSelectedUsers = allUsers.current.filter(u =>
             selectedUserIds.includes(u.id),
         );
-        const avatars: UserAvatarPair[] = filteredSelectedUsers.map(u => ({
+
+        let userInfos: UserChatInfo[] = filteredSelectedUsers.map(u => ({
             id: u.id,
             avatarURL: u.avatarURL,
+            displayName: u.displayName,
         }));
+        userInfos = [
+            ...userInfos,
+            {
+                avatarURL: user?.avatarURL!,
+                id: user?.id!,
+                displayName: user?.displayName!,
+            },
+        ];
 
-        if (selectedUserIds.length > 1) {
-            chatName = chatNameString;
-            if (!chatName) {
-                const selectedUserName = filteredSelectedUsers.map(
-                    u => u.displayName,
-                );
-                chatName = composeGroupChatName(selectedUserName);
-            }
-        } else {
-            chatName = filteredSelectedUsers[0].displayName || '';
-        }
+        // if (selectedUserIds.length > 1) {
+        //     chatName = chatNameString;
+        //     if (!chatName) {
+        //         const selectedUserNames = filteredSelectedUsers.map(
+        //             u => u.displayName,
+        //         );
+        //         chatName = composeGroupChatName(selectedUserNames);
+        //     }
+        // } else {
+        //     chatName = '';
+        // }
 
         if (selectedUserIds.length > 1) {
             const chat = await createChat({
-                chatName,
+                chatName: chatNameString,
                 hash,
                 userIds: [...selectedUserIds, user?.id || ''],
-                userAvatars: avatars,
+                userInfos,
             });
             navigateToChat(chat);
             return;
@@ -100,10 +110,10 @@ const NewChat = () => {
             return;
         }
         const chat = await createChat({
-            chatName,
+            chatName: chatNameString,
             hash,
             userIds: [...selectedUserIds, user?.id || ''],
-            userAvatars: avatars,
+            userInfos,
         });
         navigateToChat(chat);
     };
@@ -186,6 +196,7 @@ const NewChat = () => {
                                 />
                             )}
                             keyExtractor={({ id }) => id}
+                            showsVerticalScrollIndicator={false}
                         />
                     </InnerContainer>
                 </Container>

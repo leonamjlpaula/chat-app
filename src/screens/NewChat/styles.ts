@@ -28,6 +28,8 @@ export const Container = styled.View`
     background: ${({ theme }) => theme.screens.backgroundColor};
     height: 90%;
     padding: 12px 16px 0px 12px;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
 `;
 
 export const InnerContainer = styled.View`

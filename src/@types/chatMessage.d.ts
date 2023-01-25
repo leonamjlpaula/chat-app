@@ -4,4 +4,5 @@ interface ChatMessage {
     createdAt: Date;
     avatarURL: string;
     displayName: string;
+    user: string;
 }

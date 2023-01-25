@@ -9,13 +9,13 @@ export const fetchChatByHash = async (hash: string): Promise<Chat | null> => {
     if (querySnapshot.empty) {
         return null;
     }
-    const { users, chatName, avatars, lastMessage, createdAt, updatedAt } =
+    const { users, chatName, userInfos, lastMessage, createdAt, updatedAt } =
         querySnapshot.docs[0].data();
     return {
         id: querySnapshot.docs[0].id,
         users,
         chatName,
-        avatars,
+        userInfos,
         lastMessage,
         createdAt,
         updatedAt,
