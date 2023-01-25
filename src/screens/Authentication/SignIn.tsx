@@ -24,8 +24,8 @@ import {
 type Props = NativeStackScreenProps<AuthStackParamList, 'SignIn'>;
 
 const SignIn = ({ navigation }: Props) => {
-    const [email, setEmail] = useState('leonamjlpaula@gmail.com');
-    const [password, setPassword] = useState('123456');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 
