@@ -33,7 +33,8 @@ export const Container = styled.View`
 `;
 
 export const InnerContainer = styled.View`
-    padding: 8px 8px 0px 8px;
+    padding: 8px 8px 20px 8px;
+    flex: 1;
 `;
 
 export const Spacer = styled.View`

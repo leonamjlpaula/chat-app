@@ -9,6 +9,7 @@ import { DefaultTheme } from 'styled-components/native';
 import { AppRoutes } from './navigators';
 
 export default function App() {
+    //TODO: Remove
     useEffect(() => {
         firestore().settings({
             persistence: false,
