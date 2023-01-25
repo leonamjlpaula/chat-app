@@ -1,6 +1,7 @@
 export { default as Avatar } from './Avatar/Avatar';
 export { default as ChatListItem } from './ChatListItem/ChatListItem';
 export { default as ChatMessageComponent } from './ChatMessageComponent/ChatMessageComponent';
+export { default as ChatMessageSectionHeader } from './ChatMessageSectionHeader/ChatMessageSectionHeader';
 export { default as CircleLogo } from './CircleLogo/CircleLogo';
 export { default as GroupChatAvatar } from './GroupChatAvatar/GroupChatAvatar';
 export { default as SendMessageInput } from './SendMessageInput/SendMessageInput';
