@@ -7,6 +7,7 @@ const colors = {
     white: '#fff',
     blue: '#506CF0',
     lightGrey: '#D2D7DB',
+    veryLightGrey: '#F0F3F5',
 };
 
 const fontFamily = 'Arial';
@@ -40,6 +41,7 @@ export const defaultTheme = {
     },
     shapes: {
         lineColor: colors.lightGrey,
+        lightLineColor: colors.veryLightGrey,
     },
     tabIcons: { activeColor: colors.black, inactiveColor: colors.greyMedium },
     screens: {

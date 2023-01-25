@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import format from 'date-fns/format';
 
 import Avatar from '../Avatar/Avatar';
@@ -19,7 +19,7 @@ const ChatMessageComponent = ({
     displayName,
     createdAt,
 }: ChatMessage) => {
-    const formattedDate = format(createdAt, 'MM/dd - hh:mm aa');
+    const formattedDate = format(createdAt, 'hh:mm aa');
 
     return (
         <Container>
@@ -39,4 +39,4 @@ const ChatMessageComponent = ({
     );
 };
 
-export default ChatMessageComponent;
+export default memo(ChatMessageComponent);
