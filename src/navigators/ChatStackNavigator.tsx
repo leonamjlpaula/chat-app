@@ -2,7 +2,13 @@ import React from 'react';
 import { ChatRoom, ChatsList } from '@app/screens';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-const ChatStack = createNativeStackNavigator();
+export type ChatStackParamList = {
+    ChatsList: undefined;
+    ChatRoom: { stringfiedChat: string };
+    NewChat: undefined;
+};
+
+const ChatStack = createNativeStackNavigator<ChatStackParamList>();
 
 export default function ChatStackNavigator() {
     return (

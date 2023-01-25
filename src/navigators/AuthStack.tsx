@@ -2,13 +2,18 @@ import React from 'react';
 import { SignIn, SignUp } from '@app/screens';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-const ChatStack = createNativeStackNavigator();
+export type AuthStackParamList = {
+    SignIn: undefined;
+    SignUp: undefined;
+};
 
-export default function ChatStackNavigator() {
+const AuthStack = createNativeStackNavigator<AuthStackParamList>();
+
+export default function AuthNavigator() {
     return (
-        <ChatStack.Navigator screenOptions={{ headerShown: false }}>
-            <ChatStack.Screen name="SignIn" component={SignIn} />
-            <ChatStack.Screen name="SignUp" component={SignUp} />
-        </ChatStack.Navigator>
+        <AuthStack.Navigator screenOptions={{ headerShown: false }}>
+            <AuthStack.Screen name="SignIn" component={SignIn} />
+            <AuthStack.Screen name="SignUp" component={SignUp} />
+        </AuthStack.Navigator>
     );
 }

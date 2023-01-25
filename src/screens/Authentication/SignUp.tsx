@@ -9,8 +9,9 @@ import { createUser } from '@app/api/creatUser';
 import { CircleLogo } from '@app/components';
 import { useAuth } from '@app/context/AuthProvider';
 import { Input } from '@app/designSystem';
+import { AuthStackParamList } from '@app/navigators/AuthStack';
 import auth from '@react-native-firebase/auth';
-import { useNavigation } from '@react-navigation/native';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 import {
     Container,
@@ -22,14 +23,15 @@ import {
     Spacer,
 } from './styles';
 
-const SignUp = () => {
+type Props = NativeStackScreenProps<AuthStackParamList, 'SignUp'>;
+
+const SignUp = ({ navigation }: Props) => {
     const [email, setEmail] = useState('');
     const [name, setName] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 
-    const { navigate } = useNavigation();
     const { setUser } = useAuth();
 
     const handleSignUp = async () => {
@@ -102,7 +104,7 @@ const SignUp = () => {
                     </HStack>
                 </LoginButton>
                 <Spacer />
-                <TouchableOpacity onPress={() => navigate('SignIn')}>
+                <TouchableOpacity onPress={() => navigation.navigate('SignIn')}>
                     <LinkText>Already have an account? Sign in</LinkText>
                 </TouchableOpacity>
             </Container>

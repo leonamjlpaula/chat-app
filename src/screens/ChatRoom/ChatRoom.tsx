@@ -5,11 +5,12 @@ import { updateLastMessage } from '@app/api/updateLastMessage';
 import ChevronLeftSVG from '@app/assets/images/chevron-left.svg';
 import { ChatMessageComponent, SendMessageInput } from '@app/components';
 import { useAuth } from '@app/context/AuthProvider';
+import { ChatStackParamList } from '@app/navigators/ChatStackNavigator';
 import { getChatName } from '@app/utils/getChatName';
 import firestore, {
     FirebaseFirestoreTypes,
 } from '@react-native-firebase/firestore';
-import { useNavigation, useRoute } from '@react-navigation/native';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import isAfter from 'date-fns/isAfter';
 
 import {
@@ -24,12 +25,12 @@ import {
     Separator,
 } from './styles';
 
-const ChatRoom = () => {
-    const [messages, setMessages] = useState<ChatMessage[]>([]);
-    const { navigate } = useNavigation();
-    const { params } = useRoute();
+type Props = NativeStackScreenProps<ChatStackParamList, 'ChatRoom'>;
 
-    const chat = JSON.parse(params?.chat);
+const ChatRoom = ({ navigation, route }: Props) => {
+    const [messages, setMessages] = useState<ChatMessage[]>([]);
+
+    const chat = JSON.parse(route.params?.stringfiedChat);
 
     const { user: loggedUser } = useAuth();
 
@@ -40,7 +41,7 @@ const ChatRoom = () => {
         getChatName({ userInfos: chat.userInfos, userId: loggedUser?.id! });
 
     const handleOnBackPress = () => {
-        navigate('ChatsList');
+        navigation.navigate('ChatsList');
     };
 
     const handleSendMessage = async (message: string) => {
