@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styled from 'styled-components/native';
 
 const AvatarBack = styled.Image`
@@ -30,10 +30,10 @@ interface GroupChatAvatarProps {
     avatarURLFront: string;
 }
 
-export default function GroupChatAvatar({
+const GroupChatAvatar = ({
     avatarURLBack,
     avatarURLFront,
-}: GroupChatAvatarProps) {
+}: GroupChatAvatarProps) => {
     return (
         <Container>
             <AvatarBack
@@ -48,4 +48,5 @@ export default function GroupChatAvatar({
             />
         </Container>
     );
-}
+};
+export default memo(GroupChatAvatar);

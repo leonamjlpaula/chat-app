@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { FlatList } from 'react-native';
 import { createChat } from '@app/api/createChat';
 import { fetchAllUsers } from '@app/api/fetchAllUsers';
@@ -60,6 +60,7 @@ const NewChat = () => {
     };
 
     const handleOnCreate = async () => {
+        if (selectedUserIds.length === 0) return;
         const hash = generateChatHash(selectedUserIds);
         // let chatName = '';
         const filteredSelectedUsers = allUsers.current.filter(u =>
@@ -113,13 +114,16 @@ const NewChat = () => {
         setSearchString('');
     };
 
-    const handleOnUserPress = (userId: string) => {
-        if (selectedUserIds.includes(userId))
-            setSelectedUserIds(ids => ids.filter(id => id !== userId));
-        else {
-            setSelectedUserIds(ids => [...ids, userId]);
-        }
-    };
+    const handleOnUserPress = useCallback(
+        (userId: string) => {
+            if (selectedUserIds.includes(userId))
+                setSelectedUserIds(ids => ids.filter(id => id !== userId));
+            else {
+                setSelectedUserIds(ids => [...ids, userId]);
+            }
+        },
+        [selectedUserIds],
+    );
 
     useEffect(() => {
         const filteredUsers = allUsers.current.filter(u =>
@@ -129,6 +133,16 @@ const NewChat = () => {
         );
         setUsers(filteredUsers);
     }, [searchString]);
+
+    const renderItem = useCallback(
+        ({ item }: { item: User }) => (
+            <UserListItem
+                {...item}
+                onPress={() => handleOnUserPress(item.id)}
+            />
+        ),
+        [handleOnUserPress],
+    );
 
     return (
         <>
@@ -173,15 +187,7 @@ const NewChat = () => {
                         )}
                         <FlatList
                             data={users}
-                            renderItem={({ item }) => (
-                                <UserListItem
-                                    {...item}
-                                    onPress={() => handleOnUserPress(item.id)}
-                                    isSelected={selectedUserIds.includes(
-                                        item.id,
-                                    )}
-                                />
-                            )}
+                            renderItem={renderItem}
                             keyExtractor={({ id }) => id}
                             showsVerticalScrollIndicator={false}
                         />

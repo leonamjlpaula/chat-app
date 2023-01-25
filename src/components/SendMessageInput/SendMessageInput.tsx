@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { memo, useState } from 'react';
 import { TextInputProps } from 'react-native';
 import SendSVG from '@app/assets/images/send.svg';
 
@@ -36,4 +36,4 @@ const SendMessageInput = ({ onSend, ...rest }: SendMessageInputProps) => {
     );
 };
 
-export default SendMessageInput;
+export default memo(SendMessageInput);
