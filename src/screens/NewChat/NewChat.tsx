@@ -7,7 +7,6 @@ import AddSVG from '@app/assets/images/add.svg';
 import { TextButton, UserListItem } from '@app/components';
 import { useAuth } from '@app/context/AuthProvider';
 import { Input } from '@app/designSystem';
-import { composeGroupChatName } from '@app/utils/composeGroupChatName';
 import { generateChatHash } from '@app/utils/generateChatHash';
 import { useNavigation } from '@react-navigation/native';
 
@@ -57,7 +56,7 @@ const NewChat = () => {
 
     const navigateToChat = (chat: Chat) => {
         handleOnCancel();
-        navigate('ChatRoom', { chat: JSON.stringify(chat) });
+        navigate('ChatRoom', { stringfiedChat: JSON.stringify(chat) });
     };
 
     const handleOnCreate = async () => {
@@ -80,18 +79,6 @@ const NewChat = () => {
                 displayName: user?.displayName!,
             },
         ];
-
-        // if (selectedUserIds.length > 1) {
-        //     chatName = chatNameString;
-        //     if (!chatName) {
-        //         const selectedUserNames = filteredSelectedUsers.map(
-        //             u => u.displayName,
-        //         );
-        //         chatName = composeGroupChatName(selectedUserNames);
-        //     }
-        // } else {
-        //     chatName = '';
-        // }
 
         if (selectedUserIds.length > 1) {
             const chat = await createChat({

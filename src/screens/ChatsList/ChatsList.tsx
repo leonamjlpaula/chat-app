@@ -3,20 +3,22 @@ import { FlatList } from 'react-native';
 import { Avatar, ChatListItem, CircleLogo } from '@app/components';
 import { useAuth } from '@app/context/AuthProvider';
 import { Container } from '@app/designSystem';
+import { ChatStackParamList } from '@app/navigators/ChatStackNavigator';
 import firestore, {
     FirebaseFirestoreTypes,
 } from '@react-native-firebase/firestore';
-import { useNavigation } from '@react-navigation/native';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import isAfter from 'date-fns/isAfter';
 
 import { Header, Title } from './styles';
 
-const ChatsList = () => {
+type Props = NativeStackScreenProps<ChatStackParamList, 'ChatRoom'>;
+
+const ChatsList = ({ navigation }: Props) => {
     const [chats, setChats] = useState<Chat[]>([]);
     const [isLoading, setIsLoading] = useState(false);
 
     const { user } = useAuth();
-    const { navigate } = useNavigation();
 
     const onSnapshot = (
         querySnapshot: FirebaseFirestoreTypes.QuerySnapshot<FirebaseFirestoreTypes.DocumentData>,
@@ -83,7 +85,9 @@ const ChatsList = () => {
                     <ChatListItem
                         {...item}
                         onPress={() =>
-                            navigate('ChatRoom', { chat: JSON.stringify(item) })
+                            navigation.navigate('ChatRoom', {
+                                stringfiedChat: JSON.stringify(item),
+                            })
                         }
                     />
                 )}
