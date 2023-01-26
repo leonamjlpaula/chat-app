@@ -43,9 +43,9 @@ const NewChat = () => {
         async function loadData() {
             const result = await fetchAllUsers();
             if (result) {
+                allUsers.current = [...result];
                 const filteredResult = result.filter(u => u.id !== user?.id);
                 setUsers([...filteredResult]);
-                allUsers.current = [...filteredResult];
             }
         }
         loadData();
@@ -66,10 +66,11 @@ const NewChat = () => {
 
     const handleOnCreate = async () => {
         if (selectedUserIds.length === 0) return;
-        const hash = generateChatHash(selectedUserIds);
+        const selectedUsersAndSenderIds = [...selectedUserIds, user?.id!];
+        const hash = generateChatHash(selectedUsersAndSenderIds);
 
         const filteredSelectedUsers = allUsers.current.filter(u =>
-            selectedUserIds.includes(u.id),
+            selectedUsersAndSenderIds.includes(u.id),
         );
 
         let userInfos: UserChatInfo[] = filteredSelectedUsers.map(u => ({
@@ -77,16 +78,8 @@ const NewChat = () => {
             avatarURL: u.avatarURL,
             displayName: u.displayName,
         }));
-        userInfos = [
-            ...userInfos,
-            {
-                avatarURL: user?.avatarURL!,
-                id: user?.id!,
-                displayName: user?.displayName!,
-            },
-        ];
 
-        if (selectedUserIds.length > 1) {
+        if (selectedUsersAndSenderIds.length > 2) {
             const chat = await createChat({
                 chatName: chatNameString,
                 hash,
@@ -98,6 +91,7 @@ const NewChat = () => {
         }
 
         const existingChat = await fetchChatByHash(hash);
+
         if (existingChat) {
             navigateToChat(existingChat);
             return;
