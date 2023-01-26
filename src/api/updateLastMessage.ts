@@ -10,7 +10,7 @@ export const updateLastMessage = async ({
     chatId,
 }: IUpdateLastMessage) => {
     await firestore().collection('chats').doc(chatId).update({
-        updateAt: firestore.Timestamp.now(),
+        updatedAt: firestore.Timestamp.now(),
         lastMessage,
     });
 };
