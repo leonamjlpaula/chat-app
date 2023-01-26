@@ -27,7 +27,7 @@ const NewChat = () => {
     const [selectedUserIds, setSelectedUserIds] = useState<string[]>([]);
     const [users, setUsers] = useState<User[]>([]);
     const [searchString, setSearchString] = useState('');
-    const [chatNameString, setChatNameString] = useState('');
+    const [chatName, setChatName] = useState('');
 
     const allUsers = useRef<User[]>([]);
 
@@ -38,6 +38,7 @@ const NewChat = () => {
         if (!modalVisible) {
             setSelectedUserIds([]);
             setSearchString('');
+            setChatName('');
         }
 
         async function loadData() {
@@ -81,7 +82,7 @@ const NewChat = () => {
 
         if (selectedUsersAndSenderIds.length > 2) {
             const chat = await createChat({
-                chatName: chatNameString,
+                chatName,
                 hash,
                 userIds: [...selectedUserIds, user?.id || ''],
                 userInfos,
@@ -97,7 +98,7 @@ const NewChat = () => {
             return;
         }
         const chat = await createChat({
-            chatName: chatNameString,
+            chatName: chatName,
             hash,
             userIds: [...selectedUserIds, user?.id || ''],
             userInfos,
@@ -178,8 +179,8 @@ const NewChat = () => {
                                 <Input
                                     leftIcon="account-group"
                                     placeholder="Group name"
-                                    value={chatNameString}
-                                    onChangeText={setChatNameString}
+                                    value={chatName}
+                                    onChangeText={setChatName}
                                 />
                                 <Spacer />
                             </>
