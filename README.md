@@ -1,5 +1,5 @@
 
-# CircleChatApp
+# ChatApp
 
 
 ## Installation
